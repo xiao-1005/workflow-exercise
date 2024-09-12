@@ -26,60 +26,49 @@ public class Shop {
 		book.add(b2);
 		book.add(b3);
 	}
-
-
+	
 	//修改BOOK
 	public void alterBOOK() {
-		BOOK ddd = new BOOK();
+		BOOK bbb = new BOOK();
 		System.out.println("--->修改BOOK");
 		System.out.println("请输入要修改的图书名称：");
 		String name7 = input.next();
 		int i = -1;
-		for (BOOK d : book) {
-			if (name7.equals(d.getName())) {
+		for (BOOK b : book) {
+			if (name7.equals(b.getName())) {
 				System.out.println("请输入你要更新图书的id：");
 				int id = input.nextInt();
-				ddd.setId(id);
+				bbb.setId(id);
 				System.out.println("请输入你要更新图书的名称：");
 				String name = input.next();
-				ddd.setName(name);
+				bbb.setName(name);
 				System.out.println("请输入你要更新BOOK的借出情况：");
 				String t = input.next();
-				ddd.setStatus(t);
+				bbb.setStatus(t);
 				System.out.println("请输入你要更新BOOK的借出时间：");
 				String time = input.next();
-				ddd.setBorrowTime(time);
-				book.set(book.indexOf(d),ddd);
+				bbb.setBorrowTime(time);
+				book.set(book.indexOf(b),bbb);
 
 			}
 		}
 	}
-	
 
 	//新增BOOK
 	public void addBOOK() {
 		System.out.println("--->新增书籍");
-		System.out.print("请输入图书名称:");
-		String name = input.next();
+		System.out.print("请输入图书的名称:");
+		String bookname = input.next();
 		int i = -1;
-		for (BOOK d : book) {
-			if (name.equals(d.getName())) {
-				System.out.println("图书已存在，不能再添加该书籍！");
-				i = book.indexOf(d);
+		for (BOOK store : book) {
+			if (name.equals(store.getName())) {
+				System.out.println("图书已经存在，不能再添加该书籍！");
+				i = book.indexOf(store);
 			}
 		}
 		if (i < 0) {
-			book.add(new BOOK(book.size() + 1, name, "可借", ""));
-			System.out.println("新增《" + name + "》成功!");
-		}
-	}
-
-	//查看BOOK信息
-	public void listBOOK() {
-		System.out.println("--->查看书籍");
-		System.out.println("序号\t状态\t名称\t借出日期");
-		for (BOOK d : book) {
-			System.out.println(d.getId() +"\t" + d.getStatus() +"\t《" + d.getName() + "》\t" + d.getBorrowTime());
+			book.add(new BOOK(book.size() + 1, bookname, "可借", ""));
+			System.out.println("新增《" + bookname + "》成功!");
 		}
 	}
 
@@ -87,24 +76,32 @@ public class Shop {
 	public void deleteBOOK() {
 		System.out.println("--->删除书籍");
 		System.out.print("请输入删除图书名称:");
-		String name = input.next();
-		int index = -1;
-		for (BOOK d : book) {
-			if (name.equals(d.getName())) {
-				index = book.indexOf(d);
-				if (d.getStatus().equals("已借出")) {
-					System.out.println("《" + name + "》" + "为借出状态，不能删除！");
+		String Bookname = input.next();
+		int BooKindex = -1;
+		for (BOOK de : book) {
+			if (Bookname.equals(de.getName())) {
+				BooKindex = book.indexOf(de);
+				if (de.getStatus().equals("已借出")) {
+					System.out.println("《" + Bookname + "》" + "为借出状态，不能删除！");
 				}
 			}
 		}
-		if (index < 0)
+		if (BooKindex < 0)
 			System.out.println("不存在该图书");
 		else {
-			book.remove(index);
-			System.out.println("删除《" + name + "》成功!");
+			book.remove(BooKindex);
+			System.out.println("删除《" + Bookname + "》成功!");
 		}
 	}
-
+	
+	//查看BOOK信息
+	public void listBOOK() {
+		System.out.println("--->查看书籍列表");
+		System.out.println("序号\t状态\t名称\t借出日期");
+		for (BOOK b : book) {
+			System.out.println(b.getId() +"\t" + b.getStatus() +"\t《" + b.getName() + "》\t" + b.getBorrowTime());
+		}
+	}
 
 	// 推荐书籍
 	public void BOOKRank() {
@@ -118,5 +115,13 @@ public class Shop {
 			System.out.println("《" + d.getName() + "》");
 		}
 	}
+
+
+
+
+
+	
+
+
 
 }
